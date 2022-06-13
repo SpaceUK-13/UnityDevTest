@@ -1,0 +1,7 @@
+using System;
+
+
+public interface IDataLoader
+{
+    void LoadData(Action<IUserData,DataType> dataLoaded);
+}
