@@ -40,4 +40,9 @@ public class GameManager : MonoBehaviour, ICameraComponent
 
         return null;
     }
+
+    private void OnApplicationQuit()
+    {
+        dataLoader.ClearOldData();
+    }
 }

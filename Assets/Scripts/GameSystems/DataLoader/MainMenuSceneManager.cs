@@ -45,7 +45,6 @@ public class MainMenuSceneManager : MonoBehaviour
             return;
         }
 
-     
         dataLoader.ToogleSelectedHeroes(isSelected, hero);
         HeroSelectionReady?.Invoke(dataLoader.SelectedHeros.Count == 3);
     }
@@ -58,6 +57,6 @@ public class MainMenuSceneManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        dataLoader.DataIsReady = false;
+        dataLoader.ClearOldData();
     }
 }

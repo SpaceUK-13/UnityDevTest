@@ -20,7 +20,6 @@ public class GameDataLoader : ScriptableObject
     public void Init()
     {
         dataLoaded += DataLoadComplete;
-        ClearOldData();
         LoadData();
     }
     private void LoadData()
@@ -57,7 +56,10 @@ public class GameDataLoader : ScriptableObject
     {
         if (!gameData.ContainsKey(dataType))
         {
+
+            Debug.LogWarning($"Added data of type : {dataType}");
             gameData.Add(dataType, data);
+
         }
 
         if (gameData.Count == DataTypes.Count)
@@ -71,10 +73,16 @@ public class GameDataLoader : ScriptableObject
     {
         if (!gameData.ContainsKey(dataType))
         {
-            Debug.LogWarning($"Can not fetch data of type {dataType}");
+            Debug.LogError($"Can not find data of type :{dataType}");
             return null;
         }
-        return gameData[dataType];
+      
+        var data = gameData[dataType];
+
+        if (data == null)
+            Debug.LogError($"Data of type :{dataType} is null");
+           
+        return data;
     }
     public void AddAvilabeHeros(List<HeroScriptableObject> heros)
     {
@@ -87,8 +95,9 @@ public class GameDataLoader : ScriptableObject
         else
             SelectedHeros.Remove(hero);
     }
-    private void ClearOldData()
+    public void ClearOldData()
     {
+        DataIsReady = false;
         SelectedHeros.Clear();
         AvailableHeros.Clear();
         gameData.Clear();
