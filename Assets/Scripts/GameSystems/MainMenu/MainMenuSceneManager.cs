@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuSceneManager : MonoBehaviour
 {
 
-    [SerializeField] GameDataLoader dataLoader;
+    [SerializeField] GameDataController dataLoader;
     [SerializeField] MainMenuUIManager uiManager;
     [SerializeField] HeroManager heroManager;
 
@@ -27,6 +27,7 @@ public class MainMenuSceneManager : MonoBehaviour
         else
         {
             LoadingComplete();
+            CheckHeroSelection();
         }
         HeroSelected += HeroIsSelected;
         EnterBattle += LoadGameplayScene;
@@ -39,7 +40,8 @@ public class MainMenuSceneManager : MonoBehaviour
     }
     private void HeroIsSelected(HeroSelectionIcon icon, HeroScriptableObject hero, bool isSelected)
     {
-        if (dataLoader.SelectedHeros.Count >= 3 && !dataLoader.AvailableHeros.Contains(hero))
+       
+        if (dataLoader.SelectedHeros.Count >= 3 && !dataLoader.SelectedHeros.Contains(hero))
         {
             icon.ForceDeselect();
             return;
@@ -49,6 +51,11 @@ public class MainMenuSceneManager : MonoBehaviour
         HeroSelectionReady?.Invoke(dataLoader.SelectedHeros.Count == 3);
     }
 
+
+    public void CheckHeroSelection()
+    {
+        HeroSelectionReady?.Invoke(dataLoader.SelectedHeros.Count == 3);
+    }
 
     private void LoadGameplayScene()
     {

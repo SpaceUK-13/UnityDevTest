@@ -2,7 +2,7 @@
 public enum DataType
 { 
     PlayerCharacterData,
-    GameSceneData
+    PlayerProgressionData
 }
 
 public enum CharacterType

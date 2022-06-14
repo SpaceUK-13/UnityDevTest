@@ -4,22 +4,20 @@ using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu]
-public class GameDataLoader : ScriptableObject
+public class GameDataController : ScriptableObject
 {
     public List<DataType> DataTypes;
     public List<HeroScriptableObject> DefaultHeroes;
     public Action LoadingDone;
-  
-    Action<IUserData, DataType> dataLoaded;
+
     Dictionary<DataType, IDataLoader> dataLoaders = new Dictionary<DataType, IDataLoader>();
     Dictionary<DataType, IUserData> gameData = new Dictionary<DataType, IUserData>();
-    public bool DataIsReady {  get; set; }
+    public bool DataIsReady { get; set; }
     public List<HeroScriptableObject> AvailableHeros { private set; get; } = new List<HeroScriptableObject>();
     public List<HeroScriptableObject> SelectedHeros { private set; get; } = new List<HeroScriptableObject>();
-
     public void Init()
     {
-        dataLoaded += DataLoadComplete;
+
         LoadData();
     }
     private void LoadData()
@@ -32,20 +30,23 @@ public class GameDataLoader : ScriptableObject
             if (!dataLoaders.ContainsKey(key))
             {
                 var loader = CreateDataLoader(key);
-                loader.LoadData(dataLoaded);
+                loader.LoadData(DataLoadComplete);
                 dataLoaders.Add(key, loader);
             }
         }
     }
-     private IDataLoader CreateDataLoader(DataType type)
+    private IDataLoader CreateDataLoader(DataType type)
     {
         IDataLoader dataLoader = null;
         switch (type)
         {
             case DataType.PlayerCharacterData:
+                Debug.Log($"Creating data loader of type : {type}");
                 dataLoader = new CharacterDataLoader(DefaultHeroes);
                 break;
-            case DataType.GameSceneData:
+            case DataType.PlayerProgressionData:
+                Debug.Log($"Creating data loader of type : {type}");
+                dataLoader = new PlayerProgressionDataLoader();
                 break;
             default:
                 break;
@@ -54,12 +55,13 @@ public class GameDataLoader : ScriptableObject
     }
     private void DataLoadComplete(IUserData data, DataType dataType)
     {
+
+
         if (!gameData.ContainsKey(dataType))
         {
 
-            Debug.LogWarning($"Added data of type : {dataType}");
+            Debug.Log($"Added data of type : {dataType}");
             gameData.Add(dataType, data);
-
         }
 
         if (gameData.Count == DataTypes.Count)
@@ -76,12 +78,12 @@ public class GameDataLoader : ScriptableObject
             Debug.LogError($"Can not find data of type :{dataType}");
             return null;
         }
-      
+
         var data = gameData[dataType];
 
         if (data == null)
             Debug.LogError($"Data of type :{dataType} is null");
-           
+
         return data;
     }
     public void AddAvilabeHeros(List<HeroScriptableObject> heros)
@@ -90,10 +92,17 @@ public class GameDataLoader : ScriptableObject
     }
     public void ToogleSelectedHeroes(bool addHero, HeroScriptableObject hero)
     {
+        hero.isSelected = addHero;
         if (addHero)
             SelectedHeros.Add(hero);
         else
             SelectedHeros.Remove(hero);
+    }
+    public void SaveData(IUserData data, DataType dataType)
+    {
+        var dataController = dataLoaders[dataType];
+        gameData[dataType] = data;
+        dataController.SaveData(data);
     }
     public void ClearOldData()
     {

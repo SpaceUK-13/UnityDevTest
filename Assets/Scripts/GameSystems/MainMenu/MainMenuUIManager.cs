@@ -9,10 +9,10 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] HeroSelectionPanel selectionPanel;
     [SerializeField] BottomBar bottomBar;
 
-    GameDataLoader gameData;
+    GameDataController gameData;
     MainMenuSceneManager sceneManager;
 
-    public void Init(GameDataLoader data,MainMenuSceneManager manager)
+    public void Init(GameDataController data,MainMenuSceneManager manager)
     {
         gameData = data;
         sceneManager = manager;

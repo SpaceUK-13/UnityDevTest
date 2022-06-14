@@ -10,6 +10,8 @@ public class HeroScriptableObject : ScriptableObject
     public int Level;
     public float Experience;
     public bool IsUnlocked;
+    public bool isSelected=false;
+    public bool HeroSurvived= true;
     public Color HeroesColor;
 }
 

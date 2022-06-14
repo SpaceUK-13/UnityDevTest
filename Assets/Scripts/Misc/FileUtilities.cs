@@ -24,6 +24,11 @@ public class FileUtilities
         return JsonUtility.FromJson<CharacterPersitanatData>(File.ReadAllText(CreateFilePath(fileName)));
     }
 
+    public static PlayerProgressionData LoadProgresionData(string fileName)
+    {
+        return JsonUtility.FromJson<PlayerProgressionData>(File.ReadAllText(CreateFilePath(fileName)));
+    }
+
     private static string CreateFilePath(string fileName)
     {
         return Path.Combine(appDataPath, fileName)+".json";

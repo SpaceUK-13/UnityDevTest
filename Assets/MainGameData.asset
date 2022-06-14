@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6734decf84f754390bb89802f522a3, type: 3}
   m_Name: MainGameData
   m_EditorClassIdentifier: 
-  DataTypes: 00000000
+  DataTypes: 0000000001000000
   DefaultHeroes:
   - {fileID: 11400000, guid: 62892e18970f8a742993e17cd120045a, type: 2}
   - {fileID: 11400000, guid: cb375aa648c33b94282829e7547d9505, type: 2}

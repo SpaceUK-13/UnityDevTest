@@ -17,7 +17,7 @@ public class GameSceneUIManager : GameSceneController
 
     private void SetupUI()
     {
-        endOfGamePopUp.SetUpEndOfGamePopUp(null);
+        endOfGamePopUp.SetUpEndOfGamePopUp(gameManager.LoadMenuScene);
         gameManager.EndGameSession += endOfGamePopUp.OpenPopUp;
     }
 }

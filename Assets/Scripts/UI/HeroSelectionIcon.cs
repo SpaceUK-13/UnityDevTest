@@ -13,12 +13,15 @@ public class HeroSelectionIcon : MonoBehaviour
     [SerializeField] Color borderSelectionColor;
     [SerializeField] Button iconButton;
     [SerializeField] GameObject lockImage;
-    private bool isSelected = false;
+    bool isSelected = false;
+
+    public string ID { private set; get; }
 
     public void AddHeroData(HeroScriptableObject hero, MainMenuSceneManager sceneManager)
     {
         heroIcon.color = hero.HeroesColor;
         heroNameText.text = hero.Name;
+        ID = hero.Name;
         heroNameText.color = hero.HeroesColor;
         iconButton.interactable = hero.IsUnlocked;
         lockImage.SetActive(!hero.IsUnlocked);
@@ -26,20 +29,26 @@ public class HeroSelectionIcon : MonoBehaviour
         {
             SelectHero(sceneManager,hero);
         });
+        border.color = hero.isSelected ? borderSelectionColor : Color.white;
     }
 
-
+ 
     private void SelectHero(MainMenuSceneManager sceneManage, HeroScriptableObject hero)
     {
         isSelected = !isSelected;
         border.color = isSelected ? borderSelectionColor : Color.white;
         sceneManage.HeroSelected?.Invoke(this, hero,isSelected);
-
     }
 
     public void ForceDeselect()
     {
         isSelected = false;
         border.color = Color.white;
+    }
+
+    public void UnlockHero(bool unlocked)
+    {
+        lockImage.SetActive(!unlocked);
+        iconButton.interactable = unlocked;
     }
 }

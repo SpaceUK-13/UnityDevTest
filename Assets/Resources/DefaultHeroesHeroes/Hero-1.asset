@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Blue Fury
   Health: 100
-  AttackPower: 300
+  AttackPower: 10000
   Level: 1
   Experience: 0
   IsUnlocked: 1
+  isSelected: 0
   HeroesColor: {r: 0.54901963, g: 0.7529412, b: 0.87058824, a: 1}

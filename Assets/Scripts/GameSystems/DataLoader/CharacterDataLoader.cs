@@ -69,8 +69,12 @@ public class CharacterDataLoader : IDataLoader
             IsUnlocked = heroScriptableObject.IsUnlocked,
             ColorCode = "#"+ColorUtility.ToHtmlStringRGB(heroScriptableObject.HeroesColor)
         };
-
-        Debug.Log($"Hero Stats : {hero.Name},{hero.Level},{hero.Experience},{hero.AttackPower},{hero.Health}, {hero.ColorCode}");
         return hero;
+    }
+
+    public void SaveData(IUserData data)
+    {
+      var newData = (CharacterPersitanatData)data;
+      FileUtilities.SaveFileToJson(JsonUtility.ToJson(newData), characterDataFileName);
     }
 }
