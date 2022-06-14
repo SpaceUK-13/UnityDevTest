@@ -7,7 +7,7 @@ public class HeroSelectionPanel : MonoBehaviour
     [SerializeField] GameObject heroSelectionIcon;
     [SerializeField] Transform parentPanel;
     List<HeroSelectionIcon> icons = new List<HeroSelectionIcon>();
-    public void CreateHeroIcon(HeroScriptableObject hero,MainMenuSceneManager sceneManager)
+    public void CreateHeroIcon(HeroScriptableObject hero,MainMenuSceneManager sceneManager,MainMenuUIManager menuUI)
     {
         if (CheckIfHeroIconExitsts(hero))
             return;
@@ -18,7 +18,7 @@ public class HeroSelectionPanel : MonoBehaviour
         heroIcon.transform.localPosition = Vector3.zero;
         var icon = heroIcon.GetComponent<HeroSelectionIcon>();
         icons.Add(icon);
-        icon.AddHeroData(hero,sceneManager);
+        icon.AddHeroData(hero,sceneManager,menuUI);
     }
 
 

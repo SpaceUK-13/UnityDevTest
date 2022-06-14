@@ -8,6 +8,7 @@ public class MainMenuUIManager : MonoBehaviour
     [SerializeField] SplashScreenPopUp splashScreen;
     [SerializeField] HeroSelectionPanel selectionPanel;
     [SerializeField] BottomBar bottomBar;
+    [SerializeField] StatsPanelDisplay statsPanel;
 
     GameDataController gameData;
     MainMenuSceneManager sceneManager;
@@ -25,7 +26,15 @@ public class MainMenuUIManager : MonoBehaviour
     {
         foreach (var hero in gameData.AvailableHeros)
         {
-            selectionPanel.CreateHeroIcon(hero,sceneManager);
+            selectionPanel.CreateHeroIcon(hero,sceneManager,this);
         }
+    }
+
+    public void ActivateStatsPanel(bool toogle,HeroScriptableObject hero)
+    {
+        if (toogle)
+            statsPanel.StartPanelDisplayTimer(hero);
+        else
+            statsPanel.EndPanelDisplayTimer();
     }
 }

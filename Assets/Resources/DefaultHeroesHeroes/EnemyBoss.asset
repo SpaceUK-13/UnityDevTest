@@ -17,3 +17,7 @@ MonoBehaviour:
   AttackPower: 85
   Level: 1
   Experience: 0
+  IsUnlocked: 0
+  isSelected: 0
+  HeroSurvived: 0
+  HeroesColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}

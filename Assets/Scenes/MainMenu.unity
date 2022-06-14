@@ -498,6 +498,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9020969683a0c1e4bb4c36353cfa4fda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &728953978 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8877760858953983293, guid: 9cfff515f4a6f39499c2797e44fea49c, type: 3}
+  m_PrefabInstance: {fileID: 8278040206797465279}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae471152e93ab2d4fb3590d826cb1460, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &732847527
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +616,7 @@ MonoBehaviour:
   splashScreen: {fileID: 732847531}
   selectionPanel: {fileID: 728953976}
   bottomBar: {fileID: 255088789}
+  statsPanel: {fileID: 728953978}
 --- !u!1 &981804125
 GameObject:
   m_ObjectHideFlags: 0
